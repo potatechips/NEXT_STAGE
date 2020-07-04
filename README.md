@@ -23,6 +23,9 @@
 * 学習時間、運動時間の管理など
 
 ## 設計書
+* ER図 https://app.diagrams.net/#G11L0sard3sJP8DuRwDUvA5uxCDTg8RCl_
+*
+*
 
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/1cOcvlGKD0mJcSuqbXds_7_VYeP7TEmq3HUeOWatkEF0/edit#gid=0
