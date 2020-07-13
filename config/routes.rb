@@ -6,6 +6,12 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
+  resources :users, :only => [:show, :edit, :update, :index]
+  resources :goals do
+	  	resources :book_comments, only: [:create,:destroy]
+	    resource :favorites, only: [:create, :destroy]
+  end
+
   root "homes#top"
   get "home/about" => "homes#about"
 

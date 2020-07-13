@@ -8,7 +8,7 @@
 		<nav>
 			<ul class="nav navbar-nav navbar-right">
 				<li><%= link_to " 目標", root_path, class: "glyphicon glyphicon-list-alt" %></li>
-				<li><%= link_to " マイページ", root_path, class: "glyphicon glyphicon-user "  %></li>
+				<li><%= link_to " マイページ", user_path(current_user.id), class: "glyphicon glyphicon-user "  %></li>
 				<li><%= link_to " 検索", root_path, class: "glyphicon glyphicon-search" %></li>
 				<li><%= link_to " 通知", root_path, class: "glyphicon glyphicon-bell" %></li>
 				<li><%= link_to " ログアウト", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %></li>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  term_at: 2020-07-13 02:20:32
+  content: MyString
+  task: MyString
+
+two:
+  user_id: 1
+  term_at: 2020-07-13 02:20:32
+  content: MyString
+  task: MyString
