@@ -6,9 +6,15 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  resources :users, :only => [:show, :edit, :update, :index]
+  # ================ここをネスト(入れ子)した形に変更
+  resources :users, :only => [:show, :edit, :update, :index] do
+    resource :relationships, only: [:create, :destroy]
+    get :follows, on: :member # 追加
+    get :followers, on: :member # 追加
+  end
+  #======================================
   resources :goals do
-	  	resources :book_comments, only: [:create,:destroy]
+	  	resources :goal_comments, only: [:create,:destroy]
 	    resource :favorites, only: [:create, :destroy]
   end
 

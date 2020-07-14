@@ -1,27 +1,29 @@
 <div class="container">
 	<div class="row">
 	    <div class="col-xs-12">
-	    	<h2>みんなのプロフィール</h2>
-	    	<% @users.each do |user| %>
+	    	<h2>みんなのプロフィール</h2><br>
 		    <table class="my_table">
-		    	<thead>
-		    	    <tr>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    </tr>
-		    	</thead>
+		        <thead>
+			        <tr>
+				        <th></th>
+				        <th></th>
+				        <th></th>
+				        <th></th>
+				        <th></th>
+				        <th></th>
+			        </tr>
+			    </thead>
+			    <% @users.each do |user| %>
 		    	<tbody>
 		    	  	<tr>
-		    	  		<td></td>
-		    	  		<td><%= user.name %></td>
+		    	  		<td><%= attachment_image_tag user, :profile_image, size: '75x75',fallback: "no-image.jpg",class: "user-icon" %></td>
+		    	  		<td>　　<%= user.name %></td>
 		    	  		<td></td>
 		    	  		<td></td>
 		    	  	</tr>
 		    	</tbody>
+		    	<% end %>
 	    	</table>
-	    	<% end %>
 	    </div>
 	</div>
 </div>
