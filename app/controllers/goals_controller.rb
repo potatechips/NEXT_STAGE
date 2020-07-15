@@ -1,6 +1,7 @@
 class GoalsController < ApplicationController
 
 	def new
+		@goal = Goal.new
 	end
 
 	def show
@@ -10,6 +11,14 @@ class GoalsController < ApplicationController
 	end
 
 	def create
+		@goal = Goal.new(goal_params)
+		@goal.user_id = current_user.user_id
+		if  @goal.save
+			flash[:notice] = "successfully created goal!"
+			redirect_to goal_path(@goal)
+		else
+			render :new
+		end
 	end
 
 	def edit

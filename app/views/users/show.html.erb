@@ -1,25 +1,16 @@
 <div class="container">
 	<div class="row">
 	    <div class="col-xs-12">
-	    	<h2>会員情報</h2>
+	    	<h2 class="user-title">会員情報</h2>
 	    	<div class="col-xs-offset-9">
             	<%= link_to "登録情報を編集する",edit_user_path(@user.id),class: "btn btn-success" %>
             </div>
-		    <table class="my_table">
-		    	<thead>
-		    	    <tr>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    </tr>
-		    	</thead>
+		    <table class="table1">
 		    	<tbody>
 		    	  	<tr>
-		    	  		<td></td>
-		    	  		<td></td>
-		    	  		<td></td>
-		    	  		<td></td>
+		    	  		<td><%= attachment_image_tag @user, :profile_image, size: '75x75',fallback: "no-image.jpg",class: "user-icon" %>
+		    	  		　　<%= @user.name %></td>
+		    	  		<td>　　　　<%= @user.introduction %></td>
 		    	  	</tr>
 		    	</tbody>
 	    	</table>

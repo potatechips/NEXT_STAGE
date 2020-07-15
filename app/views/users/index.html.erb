@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="row">
 	    <div class="col-xs-12">
-	    	<h2>ユーザー一覧</h2><br>
-		    <table class="my_table">
+	    	<h2 class="user-title">ユーザー一覧</h2><br>
+		    <table class="user_table">
 			    <% @users.each do |user| %>
 		    	<tbody>
 		    	  	<tr>
@@ -24,6 +24,7 @@
 		    	</tbody>
 		    	<% end %>
 	    	</table>
+	    	<%= paginate @users %>
 	    </div>
 	</div>
 </div>
