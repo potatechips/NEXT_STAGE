@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>目標編集ページ</h2><br>
+			<%= form_for (@goal) do |f| %>
+				<div class="field">
+				    <%= f.label :目標 %>　　
+				    <%= f.text_field :content,placeholder: "達成、挑戦したいこと" %>
+				</div>
+
+				<div class="field">
+				    <%= f.label :やるべきこと %>　　
+				    <%= f.text_field :task,placeholder: "目標達成に必要なタスク" %>
+				</div>
+				<%= f.submit "目標を決定する！", class: "btn btn-secondary" %>
+			<% end %>
+		</div>
+	</div>
+</div>

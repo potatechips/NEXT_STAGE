@@ -1,27 +1,46 @@
 <div class="container">
 	<div class="row">
 	    <div class="col-xs-12">
-	    	<h2>目標一覧</h2><br>
+	    	<h2 class="goal-title">目標一覧</h2><br>
 	    	<div class="col-xs-offset-9">
             	<%= link_to "新しい目標を投稿する！",new_goal_path,class: "btn btn-primary" %>
             </div>
 		    <table class="goal_table">
 		    	<thead>
 		    	    <tr>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    	<th></th>
-		    	    </tr>
+			    		<th colspan="2">ユーザー名</th>
+			    		<th>内容</th>
+			    		<th></th>
+			    		<th></th>
+			    	</tr>
 		    	</thead>
+		    	<% @goals.each do |goal| %>
 		    	<tbody>
 		    	  	<tr>
+		    	  		<td><%= attachment_image_tag goal.user, :profile_image, size: '75x75',fallback: "no-image.jpg",class: "user-icon" %></td>
+		    	  		<td><%= goal.user.name %></td>
+		    	  		<td><%= link_to goal.content, goal_path(goal.id) %></td>
+		    	  		<td>
+		    	  			<% if goal.favorited_by?(current_user) %>
+		    	  			  <%= link_to goal_favorites_path(goal),method: :delete do %>
+		    	  			  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+				              <%= goal.favorites.count %>
+				              <% end %>
+				            <% else %>
+				              <%= link_to goal_favorites_path(goal),method: :post do %>
+				              <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+				              <%= goal.favorites.count %>
+				              <% end %>
+			                <% end %>
+		    	  		</td>
+		    	  		<td><%= link_to "編集する", edit_goal_path(goal.id), class: "btn btn-success" %></td>
+		    	  	</tr>
+		    	  	<tr>
 		    	  		<td></td>
-		    	  		<td></td>
-		    	  		<td></td>
-		    	  		<td></td>
+		    	  		<td><%= goal.created_at.strftime('%Y/%m/%d') %></td>
 		    	  	</tr>
 		    	</tbody>
+		    	<% end %>
 	    	</table>
 	    </div>
 	</div>
