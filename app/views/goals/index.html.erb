@@ -1,10 +1,10 @@
 <div class="container">
 	<div class="row">
-	    <div class="col-xs-12">
+		<div class="col-xs-3">
+			<%= render 'goals/new', goal: @goal %>
+		</div>
+	    <div class="col-xs-9">
 	    	<h2 class="goal-title">目標一覧</h2><br>
-	    	<div class="col-xs-offset-9">
-            	<%= link_to "新しい目標を投稿する！",new_goal_path,class: "btn btn-primary" %>
-            </div>
 		    <table class="goal_table">
 		    	<thead>
 		    	    <tr>
@@ -33,6 +33,7 @@
 				              <% end %>
 			                <% end %>
 		    	  		</td>
+		    	  		<td>コメント数：<%= goal.goal_comments.count %></td>
 			    	  		<% if goal.user_id == current_user.id %>
 			  			<td><%= link_to "編集する" ,edit_goal_path(goal.id),class: "btn-sm btn-success" %></td>
 			  			<td><%= link_to "削除する" ,goal_path(goal.id),method: :delete,"data-confirm" => "本当に削除しますか？",class: "btn-sm btn-danger" %></td>

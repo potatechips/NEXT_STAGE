@@ -3,7 +3,7 @@
 	    <div class="col-xs-12">
 	    	<h2 class="user-title">会員情報</h2>
 	    	<div class="col-xs-offset-9">
-            	<%= link_to "登録情報を編集する",edit_user_path(@user.id),class: "btn btn-success" %>
+            	<%= link_to "ユーザー情報を編集する",edit_user_path(@user.id),class: "btn btn-success" %>
             </div>
 		    <table class="table1">
 		    	<tbody>
@@ -17,19 +17,19 @@
 		    	</tbody>
 	    	</table>
 	    	<h2 class="user-title"><%= @user.name %>さんの目標リスト</h2>
-	    	 <h3><%= @goal.content %></h3>
 
             <ul>
                 <!-- projectに紐付くtaskがあるだけループする -->
                 <% @user.goals.each do |goal| %>
+                    <h3><%= goal.content %></h3>
 	                <% @goal.tasks.each do |task| %>
 	                <li>
 	                    <!-- taskのtitleを表示 -->
-	                    <%= task.title %>
+	                    <%= task.title %>　　
+	                    <%= link_to "削除する", goal_task_path(task.goal_id, goal.id), method: :delete,class: "btn-sm btn-danger", data: {confirm: "本当に削除しますか?"} %>
 	                </li>
 	                <% end %>
 	            <% end %>
-
                 <!-- 新規タスク登録フォーム -->
                 <li>
                     <%= form_for [@goal, @goal.tasks.build] do |f| %>

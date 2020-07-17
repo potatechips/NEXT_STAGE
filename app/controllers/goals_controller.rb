@@ -12,6 +12,7 @@ class GoalsController < ApplicationController
 
 	def index
 		@goals = Goal.all
+		@goal = Goal.new
 	end
 
 	def create
@@ -33,7 +34,7 @@ class GoalsController < ApplicationController
 		@goal = Goal.find(params[:id])
 		if  @goal.update(goal_params)
 			flash[:notice] = "successfully updated goal!"
-		    redirect_to goal_path(@goal)
+		    redirect_to goals_path
 		else
 		    render :edit
 		end
