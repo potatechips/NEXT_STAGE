@@ -14,8 +14,9 @@ Rails.application.routes.draw do
   end
   #======================================
   resources :goals do
-	  	resources :goal_comments, only: [:create,:destroy]
-	    resource :favorites, only: [:create, :destroy]
+      resources :tasks, only: [:create,:destroy]
+      resources :goal_comments, only: [:create,:destroy]
+       resource :favorites, only: [:create, :destroy]
   end
 
   root "homes#top"

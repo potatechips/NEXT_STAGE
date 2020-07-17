@@ -7,6 +7,7 @@ class GoalsController < ApplicationController
 
 	def show
 		@goal = Goal.find(params[:id])
+		@user = @goal.user
 	end
 
 	def index
@@ -18,7 +19,7 @@ class GoalsController < ApplicationController
 		@goal.user_id = current_user.id
 		if  @goal.save
 			flash[:notice] = "successfully created goal!"
-			redirect_to goal_path(@goal)
+			redirect_back(fallback_location: root_path)
 		else
 			render :new
 		end

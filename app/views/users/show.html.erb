@@ -10,10 +10,34 @@
 		    	  	<tr>
 		    	  		<td><%= attachment_image_tag @user, :profile_image, size: '75x75',fallback: "no-image.jpg",class: "user-icon" %>
 		    	  		　　<%= @user.name %></td>
-		    	  		<td>　　　　<%= @user.introduction %></td>
+		    	  		<td><%= @user.introduction %></td>
+		    	  		<td>フォロー数：<%= @user.followings.count %></td>
+				        <td>フォロワー数：<%= @user.followers.count %></td>
 		    	  	</tr>
 		    	</tbody>
 	    	</table>
+	    	<h2 class="user-title"><%= @user.name %>さんの目標リスト</h2>
+	    	 <h3><%= @goal.content %></h3>
+
+            <ul>
+                <!-- projectに紐付くtaskがあるだけループする -->
+                <% @user.goals.each do |goal| %>
+	                <% @goal.tasks.each do |task| %>
+	                <li>
+	                    <!-- taskのtitleを表示 -->
+	                    <%= task.title %>
+	                </li>
+	                <% end %>
+	            <% end %>
+
+                <!-- 新規タスク登録フォーム -->
+                <li>
+                    <%= form_for [@goal, @goal.tasks.build] do |f| %>
+                    <%= f.text_field :title %>
+                    <%= f.submit %>
+                    <% end %>
+                </li>
+            </ul>
 	    </div>
 	</div>
 </div>
