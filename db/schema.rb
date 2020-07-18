@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_07_17_033449) do
 
   create_table "goals", force: :cascade do |t|
     t.integer "user_id"
-    t.datetime "term_at"
+    t.date "term_at"
     t.string "content"
     t.string "task"
     t.datetime "created_at", null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_07_17_033449) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
-    t.boolean "done"
+    t.boolean "done", default: false
     t.integer "goal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

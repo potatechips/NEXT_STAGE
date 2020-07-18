@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-3">
-			<%= render 'layouts/sidebar', goal: @goal, user: current_user %>
+			<%= render 'layouts/sidebar', goal: @goal_new, user: current_user %>
 		</div>
 		<div class="col-xs-9">
 			<div class="edit_box">
@@ -10,6 +10,10 @@
 					<div class="field">
 					    <%= f.label :目標 %>　　
 					    <%= f.text_field :content,placeholder: "達成、挑戦したいこと" %>
+					</div>
+					<div class="field">
+						<%= f.label :期限 %>
+						<%= f.date_select :term_at,use_month_numbers: true,start_year: 2020,end_year: 2021,include_blank: true %>
 					</div>
 				<%= f.submit "修正した目標を投稿する",class: "btn btn-primary" %>
 				<% end %>

@@ -19,15 +19,13 @@ class GoalsController < ApplicationController
 	def create
 		@goal = Goal.new(goal_params)
 		@goal.user_id = current_user.id
-		if  @goal.save
-			flash[:notice] = "successfully created goal!"
-			redirect_back(fallback_location: root_path)
-		else
-			render :new
-		end
+	    @goal.save
+		flash[:notice] = "successfully created goal!"
+		redirect_back(fallback_location: root_path)
 	end
 
 	def edit
+		@goal_new = Goal.new
 		@goal = Goal.find(params[:id])
 		@user = current_user
 	end

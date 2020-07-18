@@ -12,7 +12,7 @@
 			    		<th>内容</th>
 			    		<th></th>
 			    		<th></th>
-			    		<th>期限(自由設定)</th>
+			    		<th></th>
 			    	</tr>
 		    	</thead>
 		    	<% @goals.each do |goal| %>
@@ -35,7 +35,7 @@
 			                <% end %>
 		    	  		</td>
 		    	  		<td>コメント数：<%= goal.goal_comments.count %></td>
-		    	  		<!-- <td>#<%= goal.term_at %></td> -->
+		    	  		<td>期限　<%= goal.term_at %></td>
 		    	  	</tr>
 		    	  	<tr>
 		    	  		<td><% if current_user != goal.user %>
