@@ -13,6 +13,7 @@ class GoalsController < ApplicationController
 	def index
 		@goals = Goal.all
 		@goal = Goal.new
+		@user = current_user
 	end
 
 	def create
@@ -28,6 +29,7 @@ class GoalsController < ApplicationController
 
 	def edit
 		@goal = Goal.find(params[:id])
+		@user = current_user
 	end
 
 	def update

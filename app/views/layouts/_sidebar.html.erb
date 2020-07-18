@@ -1,0 +1,28 @@
+    <table class="table">
+	   	<%= attachment_image_tag user, :profile_image, size: '75x75',fallback: "no-image.jpg",class: "user-icon" %>
+        <tbody>
+	        <tr>
+	    	    <th>ログインユーザー</th>
+	    	    <th><%= user.name %></th>
+	        </tr>
+        </tbody>
+    </table>
+<h3>新規目標投稿</h3>
+	<%= form_for (goal) do |f| %>
+		<div class="field">
+		    <%= f.label :目標 %>
+		    <%= f.text_field :content,placeholder: "達成、挑戦したいこと" %>
+		</div>
+		<div class="field">
+			<%= f.label :期限 %>
+			<%= f.date_select :term_at,use_month_numbers: true,start_year: 2020,end_year: 2021,include_blank: true,selected: Date.today %>
+		</div>
+		<br>
+		<%= f.submit "新しい目標を立てる！", class: "btn btn-primary" %>
+	<% end %>
+	<br>
+<h3>トップページへ</h3>
+	<%= link_to "NEXT_STAGE",root_path %>
+<h3>NEXT_STAGE<br>
+    (当サイト)について</h3>
+	<%= link_to "NEXTSTAGE 概要",home_about_path %>

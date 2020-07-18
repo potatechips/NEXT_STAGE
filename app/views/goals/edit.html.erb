@@ -1,19 +1,23 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">
-			<h2>目標編集ページ</h2><br>
-			<%= form_for (@goal) do |f| %>
-				<div class="field">
-				    <%= f.label :目標 %>　　
-				    <%= f.text_field :content,placeholder: "達成、挑戦したいこと" %>
-				</div>
-
-				<div class="field">
-				    <%= f.label :やるべきこと %>　　
-				    <%= f.text_field :task,placeholder: "目標達成に必要なタスク" %>
-				</div>
-				<%= f.submit "目標を決定する！", class: "btn btn-secondary" %>
-			<% end %>
+		<div class="col-xs-3">
+			<%= render 'layouts/sidebar', goal: @goal, user: current_user %>
+		</div>
+		<div class="col-xs-9">
+			<div class="edit_box">
+				<h2>目標編集ページ</h2><br>
+				<%= form_for (@goal) do |f| %>
+					<div class="field">
+					    <%= f.label :目標 %>　　
+					    <%= f.text_field :content,placeholder: "達成、挑戦したいこと" %>
+					</div>
+				<%= f.submit "修正した目標を投稿する",class: "btn btn-primary" %>
+				<% end %>
+		    </div>
+		    <br>
+		    <% @user.goals.each do |goal| %>
+		        <h3><%= goal.content %></h3>
+		    <% end %>
 		</div>
 	</div>
 </div>
