@@ -11,7 +11,7 @@ class GoalsController < ApplicationController
 	end
 
 	def index
-		@goals = Goal.all
+		@goals = Goal.page(params[:page]).per(8)
 		@goal = Goal.new
 		@user = current_user
 	end

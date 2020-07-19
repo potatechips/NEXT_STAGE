@@ -22,20 +22,11 @@
                 <!-- projectに紐付くtaskがあるだけループする -->
                 <% @user.goals.each do |goal| %>
                     <h3><%= goal.content %></h3>
-	                <% @goal.tasks.each do |task| %>
-	                <li>
-	                    <!-- taskのtitleを表示 -->
-	                    <%= task.title %>　　
-	                    <%= link_to "削除する", goal_task_path(task.goal_id, goal.id), method: :delete,class: "btn-sm btn-danger", data: {confirm: "本当に削除しますか?"} %>
-	                </li>
-	                <% end %>
+	                
 	            <% end %>
                 <!-- 新規タスク登録フォーム -->
                 <li>
-                    <%= form_for [@goal, @goal.tasks.build] do |f| %>
-                    <%= f.text_field :title %>
-                    <%= f.submit %>
-                    <% end %>
+                 
                 </li>
             </ul>
 	    </div>

@@ -12,16 +12,15 @@
 					    <%= f.text_field :content,placeholder: "達成、挑戦したいこと" %>
 					</div>
 					<div class="field">
-						<%= f.label :期限 %>
+						<%= f.label :期限 %>　　
 						<%= f.date_select :term_at,use_month_numbers: true,start_year: 2020,end_year: 2021,include_blank: true %>
-					</div>
+					</div><br>
 				<%= f.submit "修正した目標を投稿する",class: "btn btn-primary" %>
 				<% end %>
 		    </div>
 		    <br>
-		    <% @user.goals.each do |goal| %>
-		        <h3><%= goal.content %></h3>
-		    <% end %>
+		    <%= link_to "◀◀一覧ページへ",goals_path %>　　　
+		    <%= link_to "▶▶目標へのタスク設定はマイページから",user_path(@user.id) %>
 		</div>
 	</div>
 </div>

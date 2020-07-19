@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@goal = Goal.find(params[:id])
-		@task = Task.find(params[:id])
 	end
 
 	def index
@@ -27,13 +26,15 @@ class UsersController < ApplicationController
 
 	# ==============user,usersで呼ぶデータを定義する、userは同じ================
 	def follows
-	    user = User.find(params[:id])
-	    @users = user.followings
+	    @user = User.find(params[:id])
+	    @users = @user.followings.page(params[:page]).per(8)
+	    @goal = Goal.new
 	end
 
 	def followers
-	    user = User.find(params[:id])
-	    @users = user.followers
+	    @user = User.find(params[:id])
+	    @users = @user.followers.page(params[:page]).per(8)
+	    @goal = Goal.new
 	end
 # ==============↑usersで一覧表示したいデータの区別を行う================
 
