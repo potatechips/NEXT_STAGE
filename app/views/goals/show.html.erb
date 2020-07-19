@@ -1,25 +1,41 @@
-<div class="coontainer">
+<div class="container">
     <div class="row">
-        <div class="col-xs-12">
-            <h1><%= @goal.content %></h1>
-
+        <div class="col-xs-3">
+            <%= render 'layouts/sidebar', goal: @goal, user: current_user %>
+        </div>
+        <div class="col-xs-9">
+            <h2><%= @goal.content %></h2>
             <ul>
                 <!-- projectに紐付くtaskがあるだけループする -->
                 <% @goal.tasks.each do |task| %>
                 <li>
+                    <!-- 進捗管理用チェックボックス -->
+                    <!-- idやvalueは不要なのでオプションはブランク -->
+                    <!-- task.done がチェックの有無を意味する(true, false) -->
+                    <!-- taskのIDとgoalのIDを属性として保持させて使えるようにする -->
+                    <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>
                     <!-- taskのtitleを表示 -->
-                    <%= task.title %>
+                    <%= task.title %>　　
+                    <!-- 削除リンク(taskのプロジェクトIDとtaskIDを取得) -->
+                    <%= link_to "削除する", goal_task_path(task.goal_id, task.id), method: :delete, data: {confirm: "本当に削除しますか?"},class: "btn-sm btn-danger" %>
                 </li>
                 <% end %>
-
                 <!-- 新規タスク登録フォーム -->
                 <li>
                     <%= form_for [@goal, @goal.tasks.build] do |f| %>
                     <%= f.text_field :title %>
-                    <%= f.submit %>
+                    <%= f.submit "タスクを設定する" %>
                     <% end %>
                 </li>
             </ul>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        $("input[type=checkbox]").click(function() {
+            $.post('/goals/'+$(this).data('goal_id')+'/tasks/'+$(this).data('id')+'/toggle')
+        })
+    })
+</script>

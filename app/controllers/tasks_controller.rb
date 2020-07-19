@@ -11,7 +11,18 @@ class TasksController < ApplicationController
     def destroy
         @task = Task.find(params[:id])
         @task.destroy
-        redirect_to goals_path
+        redirect_back(fallback_location: root_path)
+    end
+
+        # toggleアクションを追加
+    def toggle
+        render nothing: true
+        @task      = Task.find(params[:id])
+        # タスクのdoneの値をひっくり返す
+        @task.done = !@task.done
+        @task.save
+        # 下記でもいいけど、render nothing: true でOKなので、下記はコメントアウト
+        # redirect_to goal_path(params[:goal_id])
     end
     private
     def tasks_params

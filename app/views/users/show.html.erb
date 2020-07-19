@@ -1,34 +1,37 @@
 <div class="container">
 	<div class="row">
-	    <div class="col-xs-12">
-	    	<h2 class="user-title">会員情報</h2>
+		<div class="col-xs-3">
+			<%= render 'layouts/sidebar', goal: @goal, user: current_user %>
+		</div>
+	    <div class="col-xs-9">
 	    	<div class="col-xs-offset-9">
             	<%= link_to "ユーザー情報を編集する",edit_user_path(@user.id),class: "btn btn-success" %>
             </div>
+	    	<h2 class="user-title">会員情報</h2>
 		    <table class="table1">
 		    	<tbody>
 		    	  	<tr>
-		    	  		<td><%= attachment_image_tag @user, :profile_image, size: '75x75',fallback: "no-image.jpg",class: "user-icon" %>
+		    	  		<td><%= attachment_image_tag @user, :profile_image, size: '60x60',fallback: "no-image.jpg",class: "user-icon" %>
 		    	  		　　<%= @user.name %></td>
-		    	  		<td><%= @user.introduction %></td>
-		    	  		<td>フォロー数：<%= @user.followings.count %></td>
-				        <td>フォロワー数：<%= @user.followers.count %></td>
+		    	  		<td>フォロー数：<%= link_to @user.followings.count,follows_user_path(@user.id) %></td>
+				        <td>フォロワー数：<%= link_to @user.followers.count,followers_user_path(@user.id) %></td>
 		    	  	</tr>
+		    	  	<tr><td><%= @user.introduction %></td></tr>
 		    	</tbody>
 	    	</table>
 	    	<h2 class="user-title"><%= @user.name %>さんの目標リスト</h2>
-
-            <ul>
                 <!-- projectに紐付くtaskがあるだけループする -->
                 <% @user.goals.each do |goal| %>
-                    <h3><%= goal.content %></h3>
-	                
+                    <h3><%=link_to goal.content %></h3>
+                    <%= link_to "目標を修正" ,edit_goal_path(goal.id),class: "btn-sm btn-success" %>　
+                    <%= link_to "タスク追加",goal_path(goal.id),class: "btn-sm btn-primary" %>
+	                    <% goal.tasks.each do |task| %>
+	                        <div class="task">
+		                        <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>
+		                        <%= task.title %>
+		                    </div>
+	                    <% end %>
 	            <% end %>
-                <!-- 新規タスク登録フォーム -->
-                <li>
-                 
-                </li>
-            </ul>
 	    </div>
 	</div>
 </div>
