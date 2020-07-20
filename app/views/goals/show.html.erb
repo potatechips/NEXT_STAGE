@@ -4,23 +4,26 @@
             <%= render 'layouts/sidebar', goal: @goal, user: current_user %>
         </div>
         <div class="col-xs-9">
-            <h2><%= @goal.content %></h2>
+            <div class="goal_box">
+            <h2 class="goal-title"><%= @goal.content %></h2>
+                    <%= link_to "◀目標編集ページへ" ,edit_goal_path(@goal.id) %>　　　
+                    <%= link_to "▶目標を削除する",goal_path(@goal.id),method: :delete,"data-confirm" => "本当に削除しますか？" %>
+            </div>
+            <h3 class="goal-title">「<%= @goal.content %>」　ために何をするか？　タスク表示</h3>
             <ul>
                 <!-- projectに紐付くtaskがあるだけループする -->
                 <% @goal.tasks.each do |task| %>
                 <li>
+                    <%= task.title %>　
                     <!-- 進捗管理用チェックボックス -->
                     <!-- idやvalueは不要なのでオプションはブランク -->
                     <!-- task.done がチェックの有無を意味する(true, false) -->
                     <!-- taskのIDとgoalのIDを属性として保持させて使えるようにする -->
-                    <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>
-                    <!-- taskのtitleを表示 -->
-                    <%= task.title %>　　
+                    <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>　　
                     <!-- 削除リンク(taskのプロジェクトIDとtaskIDを取得) -->
                     <%= link_to "削除する", goal_task_path(task.goal_id, task.id), method: :delete, data: {confirm: "本当に削除しますか?"},class: "btn-sm btn-danger" %>
                 </li>
                 <% end %>
-                <!-- 新規タスク登録フォーム -->
                 <li>
                     <%= form_for [@goal, @goal.tasks.build] do |f| %>
                     <%= f.text_field :title %>
@@ -28,6 +31,34 @@
                     <% end %>
                 </li>
             </ul>
+            <h3 class="goal-title">コメント欄</h3>
+            <table class="comment_table">
+                    <% @goal.goal_comments.each do |comment| %>
+                    <tbody>
+                        <tr>
+                           <td><%= attachment_image_tag comment.user, :profile_image, size: '50x50',fallback: "no-image.jpg",class: "user-icon" %></td>
+                           <td><%= comment.comment %></td>
+                        <% if comment.user.id == current_user.id %>
+                           <td><%= link_to "コメントを消す" ,goal_goal_comment_path(@goal.id,comment.id),method: :delete,"data-confirm" => "本当に削除しますか？",class: "btn-sm btn-warning" %></td>
+                        <% end %>
+                        </tr>
+                    </tbody>
+                    <% end %>
+            </table>
+            <%= form_for([@goal,@goal_comment]) do |f| %>
+                    <% if @goal_comment.errors.any? %>
+                    <div class="alert alert-warning">
+                <ul>
+                    <% @goal_comment.errors.full_messages.each do |message| %>
+                        <li><%= message %>error</li>
+                    <% end %>
+                </ul>
+                    </div>
+                <% end %>
+                <br>
+                <%= f.text_area :comment, class:"form-control" %>
+                <%= f.submit "送信" %>
+            <% end %>
         </div>
     </div>
 </div>

@@ -8,6 +8,9 @@ class GoalsController < ApplicationController
 	def show
 		@goal = Goal.find(params[:id])
 		@user = @goal.user
+
+		@goal_comments = GoalComment.all
+		@goal_comment = GoalComment.new
 	end
 
 	def index
@@ -34,7 +37,7 @@ class GoalsController < ApplicationController
 		@goal = Goal.find(params[:id])
 		if  @goal.update(goal_params)
 			flash[:notice] = "successfully updated goal!"
-		    redirect_to goals_path
+		    redirect_to goal_path(@goal.id)
 		else
 		    render :edit
 		end

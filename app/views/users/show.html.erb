@@ -22,16 +22,27 @@
 	    	<h2 class="user-title"><%= @user.name %>さんの目標リスト</h2>
                 <!-- projectに紐付くtaskがあるだけループする -->
                 <% @user.goals.each do |goal| %>
-                    <h3><%=link_to goal.content %></h3>
-                    <%= link_to "目標を修正" ,edit_goal_path(goal.id),class: "btn-sm btn-success" %>　
-                    <%= link_to "タスク追加",goal_path(goal.id),class: "btn-sm btn-primary" %>
+                    <h3><%=link_to goal.content,goal_path(goal.id) %></h3>
+                    <%= link_to "目標修正" ,edit_goal_path(goal.id),class: "btn-sm btn-success" %>
+                    <%= link_to "削除する",goal_path(goal.id),method: :delete,"data-confirm" => "本当に削除しますか？",class: "btn-sm btn-danger" %>　　
+                    <%= link_to "タスク設定",goal_path(goal.id),class: "btn-sm btn-primary" %>
 	                    <% goal.tasks.each do |task| %>
 	                        <div class="task">
+	                        	<li>
+	                        	<%= task.title %>　
 		                        <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>
-		                        <%= task.title %>
+			                    </li>
 		                    </div>
 	                    <% end %>
 	            <% end %>
 	    </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        $("input[type=checkbox]").click(function() {
+            $.post('/goals/'+$(this).data('goal_id')+'/tasks/'+$(this).data('id')+'/toggle')
+        })
+    })
+</script>
