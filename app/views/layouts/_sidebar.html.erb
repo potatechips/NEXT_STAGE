@@ -28,9 +28,11 @@
 		</div>
 		<%= f.submit "新しい目標を立てる！", class: "btn btn-primary" %>
 	<% end %>
-	<br>
-<h3>トップページへ</h3>
-	<%= link_to "NEXT_STAGE",root_path %>
+	<div>
+		<%= render 'search/search' %>
+	</div>
+<!-- #<h3>トップページへ</h3>
+	<%= link_to "NEXT_STAGE",root_path %> -->
 <h3>NEXT_STAGE<br>
     (当サイト)について</h3>
 	<%= link_to "NEXTSTAGE 概要",home_about_path %>

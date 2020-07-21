@@ -1,29 +1,10 @@
 <div class="container">
 	<div class="row">
-	    <div class="col-xs-12">
-	    	<h2 class="user-title">ユーザー一覧</h2><br>
-		    <table class="user_table">
-			    <% @users.each do |user| %>
-		    	<tbody>
-		    	  	<tr>
-		    	  		<td><%= attachment_image_tag user, :profile_image, size: '75x75',fallback: "no-image.jpg",class: "user-icon" %>
-		    	  		　　<%= link_to user.name,user_path(user.id) %></td>
-		    	  		<td>フォロー数：<%= link_to user.followings.count,follows_user_path(user.id) %></td>
-				        <td>フォロワー数：<%= link_to user.followers.count,followers_user_path(user.id) %></td>
-				        <td><% if current_user != user %>
-				            <% if user.followed_by?(current_user) %>
-				              <p>　<%=link_to "フォロー外す", user_relationships_path(user.id), method: :delete,class: "btn btn-danger" %></p>
-				            <% else %>
-				              <p>　<%=link_to "フォローする", user_relationships_path(user.id), method: :post,class: "btn btn-primary" %></p>
-				            <% end %>
-				            <% end %></td>
-					</tr>
-		    	  	<tr>
-		    	  		<td><%= user.introduction %></td>
-		    	  	</tr>
-		    	</tbody>
-		    	<% end %>
-	    	</table>
+	    <div class="col-xs-3">
+			<%= render 'layouts/sidebar', goal: @goal, user: current_user %>
+		</div>
+		<div class="col-xs-9">
+		 	<%= render 'users/user_table', users: @users %>
 	    	<%= paginate @users %>
 	    </div>
 	</div>

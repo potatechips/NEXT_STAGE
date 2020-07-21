@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   root "homes#top"
   get "home/about" => "homes#about"
   post '/goals/:goal_id/tasks/:id/toggle' => 'tasks#toggle'
+  get '/search' => 'search#search', as: 'search'
 
 end

@@ -4,60 +4,7 @@
 			<%= render 'layouts/sidebar', goal: @goal, user: current_user %>
 		</div>
 	    <div class="col-xs-9">
-	    	<h2 class="goal-title">目標一覧</h2>
-		    <table class="goal_table">
-		    	<thead>
-		    	    <tr>
-			    		<th colspan="2">ユーザー名</th>
-			    		<th>内容</th>
-			    		<th></th>
-			    		<th></th>
-			    		<th></th>
-			    	</tr>
-		    	</thead>
-		    	<% @goals.each do |goal| %>
-		    	<tbody>
-		    	  	<tr>
-		    	  		<td><%= attachment_image_tag goal.user, :profile_image, size: '75x75',fallback: "no-image.jpg",class: "user-icon" %></td>
-		    	  		<td><%= link_to goal.user.name,user_path(goal.user.id) %></td>
-		    	  		<td>　<%= link_to goal.content, goal_path(goal.id) %></td>
-		    	  		<td>
-		    	  			<% if goal.favorited_by?(current_user) %>
-		    	  			  <%= link_to goal_favorites_path(goal),method: :delete do %>
-		    	  			  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-				              <%= goal.favorites.count %>
-				              <% end %>
-				            <% else %>
-				              <%= link_to goal_favorites_path(goal),method: :post do %>
-				              <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-				              <%= goal.favorites.count %>
-				              <% end %>
-			                <% end %>
-		    	  		</td>
-		    	  		<td>
-		    	  			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-		    	  			コメント：<%= link_to goal.goal_comments.count,goal_path(goal.id) %>
-		    	  		</td>
-		    	  		<td>期限　<%= goal.term_at %></td>
-		    	  	</tr>
-		    	  	<tr>
-		    	  		<td><% if current_user != goal.user %>
-							    <% if goal.user.followed_by?(current_user) %>
-								    <p><%=link_to "フォロー外す", user_relationships_path(goal.user.id), method: :delete,class: "btn-sm btn-danger" %></p>
-							    <% else %>
-								    <p><%=link_to "フォローする", user_relationships_path(goal.user.id), method: :post,class: "btn-sm btn-primary" %></p>
-							    <% end %>
-							<% end %>
-						</td>
-						<td><%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S %Z") %></td>
-					<% if goal.user_id == current_user.id %>
-						<td><%= link_to "編集する" ,edit_goal_path(goal.id),class: "btn-sm btn-success" %></td>
-			  			<td><%= link_to "削除する" ,goal_path(goal.id),method: :delete,"data-confirm" => "本当に削除しますか？",class: "btn-sm btn-danger" %></td>
-			  		<% end %>
-		    	  	</tr>
-		    	</tbody>
-		    	<% end %>
-	    	</table>
+	    	<%= render 'goals/goal_table', goals: @goals %>
 	    	<%= paginate @goals %>
 	    </div>
 	</div>
