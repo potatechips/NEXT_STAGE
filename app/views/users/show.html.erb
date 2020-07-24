@@ -5,7 +5,9 @@
 		</div>
 	    <div class="col-xs-9">
 	    	<div class="col-xs-offset-9">
-            	<%= link_to "ユーザー情報を編集する",edit_user_path(@user.id),class: "btn btn-success" %>
+            	<% unless @user.email == "aaa@gmail.com" %>
+	            	<%= link_to "ユーザー情報を編集する",edit_user_path(@user.id),class: "btn btn-success" %>
+	            <% end %>
             </div>
 	    	<h2 class="user-title">会員情報</h2>
 		    <table class="table1">

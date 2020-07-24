@@ -14,12 +14,9 @@
 			        <%= link_to "<<ログイン画面へ", new_user_session_path %>　　　　　
 			        <%= link_to ">>もっと詳しく知る",home_about_path %>
 			    </h4>
-				<span><%= form_for(User.new, url:user_session_path) do |f| %>
-		                <%= f.hidden_field :email, value: "aaa@gmail.com" %>
-		                <%= f.hidden_field :password, value: "000000" %>
-		                <%= f.submit "テストユーザーとしてログイン(閲覧用)",class:"btn btn-success btn-block" %>
-		              <% end %>
-		        </span>
+				<span>
+					<%= link_to 'テストユーザーでログイン(閲覧用)', users_guest_sign_in_path, method: :post,class: "btn btn-success btn-block" %>
+				</span>
 		    <% end %>
 	    </div>
 	</div>

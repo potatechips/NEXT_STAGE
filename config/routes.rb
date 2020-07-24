@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions',
+   }
 
-  #ログアウトできなかったので追加記述して解決(devise～end)
   devise_scope :user do
-    get '/users/sign_out' => 'devise/sessions#destroy'
+    get "sign_in", :to => "users/sessions#new"
+    get "sign_out", :to => "users/sessions#destroy" 
+    post 'users/guest_sign_in', to: 'users/sessions#new_guest'
   end
-
   # ================ここをネスト(入れ子)した形に変更
   resources :users, :only => [:show, :edit, :update, :index] do
     resource :relationships, only: [:create, :destroy]
