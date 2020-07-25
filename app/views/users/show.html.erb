@@ -30,12 +30,14 @@
                     <%= link_to "削除する",goal_path(goal.id),method: :delete,"data-confirm" => "本当に削除しますか？",class: "btn-sm btn-danger" %>　　
                     <%= link_to "タスク設定",goal_path(goal.id),class: "btn-sm btn-primary" %>
                 <% end %>
-	                <% goal.tasks.each do |task| %>
-	                    <li>
-	                        <%= task.title %>　
-		                    <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>
-			            </li>
-	                <% end %>
+		            <% goal.tasks.each do |task| %>
+		                <li>
+		                    <%= task.title %>　
+			                <% if goal.user_id == current_user.id %>
+				                <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>
+				            <% end %>
+				        </li>
+		            <% end %>
             <% end %>
 	    </div>
 	</div>

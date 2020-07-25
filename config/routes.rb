@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :goal_comments, only: [:create,:destroy]
        resource :favorites, only: [:create, :destroy]
   end
+  resources :rankings, :only => :index
 
   root "homes#top"
   get "home/about" => "homes#about"
