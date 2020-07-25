@@ -5,29 +5,39 @@
         </div>
         <div class="col-xs-9">
             <div class="goal_box">
-            <h2 class="goal-title"><%= @goal.content %></h2>
-                    <%= link_to "◀目標編集ページへ" ,edit_goal_path(@goal.id) %>　　　
-                    <%= link_to "▶目標を削除する",goal_path(@goal.id),method: :delete,"data-confirm" => "本当に削除しますか？" %>
+                <h2 class="goal-title">
+                    <%= @goal.content %>　　　　
+                    <%= attachment_image_tag @user, :profile_image, size: '45x45',fallback: "no-image.jpg",class: "user-icon" %>
+                    -<%= @user.name %>さんの目標-
+                </h2>
+                <% if @goal.user_id == current_user.id %>
+                        <%= link_to "◀目標編集ページへ" ,edit_goal_path(@goal.id) %>　　　
+                        <%= link_to "▶目標を削除する",goal_path(@goal.id),method: :delete,"data-confirm" => "本当に削除しますか？" %>
+                <% end %>
             </div>
             <h3 class="goal-title">「<%= @goal.content %>」　ために何をするか？　タスク表示</h3>
             <ul>
                 <!-- projectに紐付くtaskがあるだけループする -->
-                <% @goal.tasks.each do |task| %>
+            <% @goal.tasks.each do |task| %>
                 <li>
-                    <%= task.title %>　
-                    <!-- 進捗管理用チェックボックス -->
-                    <!-- idやvalueは不要なのでオプションはブランク -->
-                    <!-- task.done がチェックの有無を意味する(true, false) -->
-                    <!-- taskのIDとgoalのIDを属性として保持させて使えるようにする -->
-                    <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>　　
-                    <!-- 削除リンク(taskのプロジェクトIDとtaskIDを取得) -->
-                    <%= link_to "削除する", goal_task_path(task.goal_id, task.id), method: :delete, data: {confirm: "本当に削除しますか?"},class: "btn-sm btn-danger" %>
+                        <%= task.title %>　
+                        <!-- 進捗管理用チェックボックス -->
+                        <!-- idやvalueは不要なのでオプションはブランク -->
+                        <!-- task.done がチェックの有無を意味する(true, false) -->
+                        <!-- taskのIDとgoalのIDを属性として保持させて使えるようにする -->
+                    <% if @goal.user_id == current_user.id %>
+                        <%= check_box_tag '', '', task.done, {'data-id' => task.id, 'data-goal_id' => task.goal_id} %>　　
+                        <!-- 削除リンク(taskのプロジェクトIDとtaskIDを取得) -->
+                        <%= link_to "削除する", goal_task_path(task.goal_id, task.id), method: :delete, data: {confirm: "本当に削除しますか?"},class: "btn-sm btn-danger" %>
+                    <% end %>
                 </li>
-                <% end %>
+            <% end %>
                 <li>
-                    <%= form_for [@goal, @goal.tasks.build] do |f| %>
-                    <%= f.text_field :title %>
-                    <%= f.submit "タスクを設定する" %>
+                    <% if @goal.user_id == current_user.id %>
+                        <%= form_for [@goal, @goal.tasks.build] do |f| %>
+                        <%= f.text_field :title %>
+                        <%= f.submit "タスクを設定する" %>
+                        <% end %>
                     <% end %>
                 </li>
             </ul>
