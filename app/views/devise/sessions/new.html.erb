@@ -27,10 +27,12 @@
                 </div>
             <% end %>
 
-            <%= link_to 'テストユーザーでログイン(閲覧用)', users_guest_sign_in_path, method: :post,class: "btn btn-success" %>
+            <%= link_to 'ゲストユーザーでログイン(閲覧用)', users_guest_sign_in_path, method: :post,class: "btn btn-success" %>
             <br>
-            <%= link_to "<<新規登録画面へ", new_registration_path(resource_name) %>　　　
-            <%= link_to ">>パスワードをお忘れですか?", new_password_path(resource_name) %>
+            <div class="command">
+                <%= link_to "<<新規登録画面へ", new_registration_path(resource_name) %>　　　
+                <%= link_to ">>パスワードをお忘れですか?", new_password_path(resource_name) %>
+            </div>
         </div>
     </div>
   </div>
