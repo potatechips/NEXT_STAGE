@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :check_guest, only: :edit,:update
 
   def check_guest
       if resource.email == 'aaa@gmail.com'

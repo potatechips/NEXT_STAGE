@@ -1,14 +1,14 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-3">
-            <%= render 'layouts/sidebar', goal: @goal, user: current_user %>
+            <%= render 'layouts/sidebar', goal: @goal_new, user: current_user %>
         </div>
         <div class="col-xs-9">
             <div class="goal_box">
                 <h2 class="goal-title">
                     <%= @goal.content %>　　　　
                     <%= attachment_image_tag @user, :profile_image, size: '45x45',fallback: "no-image.jpg",class: "user-icon" %>
-                    -<%= @user.name %>さんの目標-
+                    -<%=link_to @user.name,user_path(@user.id) %>さんの目標-
                 </h2>
                 <% if @goal.user_id == current_user.id %>
                         <%= link_to "◀目標編集ページへ" ,edit_goal_path(@goal.id) %>　　　
