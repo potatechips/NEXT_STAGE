@@ -1,3 +1,29 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.field{
+    margin: 10px;
+  }
+.actions{
+	padding: 15px;
+}
+.jump{
+	padding-left: 15px;
+}
+.command{
+	padding-top: 20px;
+}
+
+.user-icon{
+	border-radius: 50%;
+}
+.user-title{
+	border-bottom: 1px solid black;
+}
+.user_table{
+	line-height: 150%;
+}
+li{
+	margin: 10px;
+}

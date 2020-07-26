@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>NEXT_STAGE</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <head>
+      <title>NEXT_STAGE</title>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+      <% if user_signed_in? %>
+      <%= render 'layouts/login_header' %>
+      <% else %>
+      <%= render 'layouts/logout_header' %>
+      <% end %>
+
   <body>
-
-    <% if user_signed_in? %>
-    <%= render 'layouts/login_header' %>
-    <% else %>
-    <%= render 'layouts/logout_header' %>
-    <% end %>
-
-    <%= yield %>
+      <h3 class="notice"><%= notice %></h3>
+      <%= yield %>
   </body>
+
+      <%= render 'layouts/footer' %>
+
 </html>

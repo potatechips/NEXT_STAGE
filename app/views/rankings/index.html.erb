@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+			<%= render 'layouts/sidebar', goal: @goal_new, user: current_user %>
+		</div>
+		<div class="col-xs-9">
+			<h3 class="goal-title">獲得いいね数ランキング　-目標-</h3>
+				<table class="goal_table">
+			        <% @all_ranks.each.with_index(1) do |rank,i| %>
+				        <tbody>
+							<tr>
+								<td>第<%= i %>位</td>
+							    <td><%= link_to rank.content, goal_path(rank.id) %></td>
+							    <td><% if rank.favorited_by?(current_user) %>
+							    	    　いいね数：<%= link_to goal_favorites_path(rank),method: :delete do %>
+					                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+				                        <%= rank.favorites.count %>
+				                        <% end %>
+				                    <% else %>
+				                        　いいね数：<%= link_to goal_favorites_path(rank),method: :post do %>
+				                        <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+				                        <%= rank.favorites.count %>
+				                        <% end %>
+				                    <% end %>
+							    </td>
+							    <td>　<%= attachment_image_tag rank.user, :profile_image, size: '50x50',fallback: "no-image.jpg",class: "user-icon" %></td>
+							    <td><%= link_to rank.user.name,user_path(rank.user.id) %></td>
+					            <td>　　期限　<%= rank.term_at %></td>
+							</tr>
+						</tbody>
+					<% end %>
+				</table>
+			<h3 class="user-title">フォロワー数ランキング　ユーザー</h3>
+				<% @all_rankings.each.with_index(1) do |ranking,i| %>
+					<table>
+						<tr>
+							<td>第<%= i %>位</td>
+							<td>　<%= attachment_image_tag ranking, :profile_image, size: '50x50',fallback: "no-image.jpg",class: "user-icon" %></td>
+							<td><%= link_to ranking.name, user_path(ranking.id) %></td>
+							<td>フォロー数：<%= link_to ranking.followings.count,follows_user_path(ranking.id) %></td>
+						    <td>フォロワー数：<%= link_to ranking.followers.count,followers_user_path(ranking.id) %></td>
+						    <td><% if current_user != ranking %>
+						            <% if ranking.followed_by?(current_user) %>
+						              <p>　<%=link_to "フォロー外す", user_relationships_path(ranking.id), method: :delete,class: "btn-sm btn-danger" %></p>
+						            <% else %>
+						              <p>　<%=link_to "フォローする", user_relationships_path(ranking.id), method: :post,class: "btn-sm btn-primary" %></p>
+						            <% end %>
+					            <% end %>
+					        </td>
+						</tr>
+					</table>
+				<% end %>
+		</div>
+	</div>
+</div>

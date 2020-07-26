@@ -1,0 +1,32 @@
+// Place all the styles related to the goals controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.goal_box{
+  padding-bottom: 20px;
+}
+.goal-title{
+	border-bottom: 1px solid black;
+}
+.goal_table{
+	margin: 10px;
+	line-height: 160%;
+}
+table th{
+  padding : 10px 30px;
+}
+table td{
+  padding : 3px 7px;
+}
+input[type="text"] {
+        width: 200px;
+        height: 30px;
+}
+input[type="email"] {
+        width: 200px;
+        height: 30px;
+}
+input[type="password"] {
+        width: 200px;
+        height: 30px;
+}

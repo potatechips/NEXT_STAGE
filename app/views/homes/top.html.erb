@@ -1,1 +1,25 @@
-<h2>TOPページやで</h2>
+<div class="col-ls-12">
+	<div class="top">
+		<img src="assets/top2.jpg" width="100%" height="100%" %>
+		<div class="top-main">
+		  	<h1>「昨日とは違う自分になる」<br>
+		        What is NEXT STAGE?</h1>
+		        <h4>当サイト(NEXT STAGE)はなりたい自分がある方へ向けて、<br>
+			    	目標設定やタスク管理を楽しく、わかりやすく行うためのサイトです。<br>
+			        努力することをより楽しく、また未来の自分を良いものにすべく<br>
+			        当サイトをぜひご活用ください！<br>
+			<% if user_signed_in? %>
+			        <%= link_to ">>もっと詳しく知る",home_about_path %></h4>
+			<% else %>
+			        <%= link_to "<<ログイン画面へ", new_user_session_path %>　　　　　
+			        <%= link_to ">>もっと詳しく知る",home_about_path %>
+			    </h4>
+				<span>
+					<%= link_to 'ゲストユーザーでログイン(閲覧用)', users_guest_sign_in_path, method: :post,class: "btn btn-success btn-block" %>
+				</span>
+		    <% end %>
+	    </div>
+	</div>
+</div>
+
+
