@@ -23,7 +23,6 @@
 * 学習時間、運動時間の管理など
 
 ## 設計書
-* ER図 https://app.diagrams.net/#G11L0sard3sJP8DuRwDUvA5uxCDTg8RCl_(←_までコピー)
 * テーブル定義書 https://docs.google.com/spreadsheets/d/1tsYHNBjLOenEbQcwqqw6ScNGFUPXIWAw/edit#gid=2053932135
 * アプリケーション詳細設計書 https://drive.google.com/file/d/1qyLDxd2OcOt_WJVNxA-6Vxeiv_ikkkBr/view?usp=sharing
 

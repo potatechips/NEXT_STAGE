@@ -10,5 +10,5 @@ class Goal < ApplicationRecord
 
     validates :content,
     presence: { message: "入力してください"},
-    length:   {minimum: 3, message: "短すぎます"}
+    length:   {minimum: 3, message: "短すぎます(3文字以上から)"}
 end

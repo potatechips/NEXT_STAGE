@@ -3,12 +3,12 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@goal = Goal.new
+		@goal_new = Goal.new
 	end
 
 	def index
 		@users = User.page(params[:page]).per(8)
-		@goal = Goal.new
+		@goal_new = Goal.new
 	end
 
 	def edit
@@ -29,13 +29,13 @@ class UsersController < ApplicationController
 	def follows
 	    @user = User.find(params[:id])
 	    @users = @user.followings.page(params[:page]).per(8)
-	    @goal = Goal.new
+	    @goal_new = Goal.new
 	end
 
 	def followers
 	    @user = User.find(params[:id])
 	    @users = @user.followers.page(params[:page]).per(8)
-	    @goal = Goal.new
+	    @goal_new = Goal.new
 	end
 # ==============↑usersで一覧表示したいデータの区別を行う================
 

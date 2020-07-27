@@ -1,10 +1,6 @@
 class GoalsController < ApplicationController
 	before_action :authenticate_user!
 
-	def new
-		@goal = Goal.new
-	end
-
 	def show
 		@goal_new = Goal.new
 		@goal = Goal.find(params[:id])
@@ -16,16 +12,21 @@ class GoalsController < ApplicationController
 
 	def index
 		@goals = Goal.page(params[:page]).per(8)
-		@goal = Goal.new
+		@goal_new = Goal.new
 		@user = current_user
 	end
 
 	def create
-		@goal = Goal.new(goal_params)
-		@goal.user_id = current_user.id
-	    @goal.save
-		flash[:notice] = "successfully created goal!"
-		redirect_back(fallback_location: root_path)
+		@goal_new = Goal.new(goal_params)
+		@goal_new.user_id = current_user.id
+	    if @goal_new.save
+		   flash[:notice] = "successfully created goal!"
+		   redirect_to goal_path(@goal_new.id)
+		else
+		   @goals = Goal.page(params[:page]).per(8)
+		   @user = current_user
+		   render :index
+		end
 	end
 
 	def edit

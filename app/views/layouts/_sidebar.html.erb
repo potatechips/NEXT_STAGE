@@ -15,7 +15,9 @@
 	<%= form_for (goal) do |f| %>
 	<% if goal.errors.any? %>
 		<ul>
-			<% goal.errors.full_messages.inspect %>
+			<% goal.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
 		</ul>
 	<% end %>
 		<div class="field">
