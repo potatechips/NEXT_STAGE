@@ -47,7 +47,8 @@
                     <% @goal.goal_comments.each do |comment| %>
                     <tbody>
                         <tr>
-                           <td><%= attachment_image_tag comment.user, :profile_image, size: '50x50',fallback: "no-image.jpg",class: "user-icon" %></td>
+                           <td><%= attachment_image_tag comment.user, :profile_image, size: '45x45',fallback: "no-image.jpg",class: "user-icon" %></td>
+                           <td><%= link_to comment.user.name,user_path(comment.user.id) %></td>
                            <td><%= comment.comment %></td>
                         <% if comment.user.id == current_user.id %>
                            <td><%= link_to "コメントを消す" ,goal_goal_comment_path(@goal.id,comment.id),method: :delete,"data-confirm" => "本当に削除しますか？",class: "btn-sm btn-warning" %></td>
