@@ -1,0 +1,5 @@
+if (location.pathname == '/goals') {
+  $("goal_<%= @goal.id %>").html("<%= j(render 'goals/goal_table',  goal: @goal ) %>")
+} else {
+  $(".goal_<%= @goal.id %>").html("<%= j(render 'goals/show',  goal: @goal ) %>")
+}

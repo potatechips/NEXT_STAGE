@@ -17,12 +17,12 @@
                   <td>　<%= link_to goal.content, goal_path(goal.id) %></td>
                   <td>
                     <% if goal.favorited_by?(current_user) %>
-                      <%= link_to goal_favorites_path(goal),method: :delete do %>
+                      <%= link_to goal_favorites_path(goal),method: :delete, remote: true do %>
                       <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                         <%= goal.favorites.count %>
                         <% end %>
                     <% else %>
-                        <%= link_to goal_favorites_path(goal),method: :post do %>
+                        <%= link_to goal_favorites_path(goal),method: :post, remote: true do %>
                         <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
                         <%= goal.favorites.count %>
                         <% end %>
